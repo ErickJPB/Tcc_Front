@@ -1,0 +1,24 @@
+<div class="po-row">
+        
+        <po-chart
+     
+        class="po-lg-6 po-mt-2"
+        p-title="Top 5 Produtos"
+        [p-series]="coffeeConsumption"
+        [p-type]="coffeConsumingChartType"
+        (p-series-click)="showMeTheDates($event)"
+      >
+      </po-chart>
+      
+      <div class="po-md-6 po-mt-2">
+        <po-widget p-height="198">
+          <div class="po-font-title po-text-center po-pt-5">3 Novos produtos</div>
+          <div class="po-text-center">Foram cadastros recentemente 03 novos produtos nos ultimos 10 dias.</div>
+        </po-widget>
+  
+        <po-widget p-height="198">
+          <div class="po-font-title po-text-center po-pt-5">02 Novas entradas</div>
+          <div class="po-text-center">Foram cadastradas recentemente 02 novas entradas nos ultimos 10 dias. </div>
+        </po-widget>
+      </div>
+    </div>

@@ -1,0 +1,19 @@
+import { PoDisclaimerBaseComponent } from './po-disclaimer-base.component';
+import * as i0 from "@angular/core";
+/**
+ * @docsPrivate
+ *
+ * @docsExtends PoDisclaimerBaseComponent
+ *
+ * @examplePrivate
+ *
+ * <example-private name="po-disclaimer" title="PO Disclaimer">
+ *   <file name="sample-po-disclaimer.component.html"> </file>
+ *   <file name="sample-po-disclaimer.component.ts"> </file>
+ * </example-private>
+ */
+export declare class PoDisclaimerComponent extends PoDisclaimerBaseComponent {
+    onKeyPress(event: any): void;
+    static ɵfac: i0.ɵɵFactoryDeclaration<PoDisclaimerComponent, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<PoDisclaimerComponent, "po-disclaimer", never, {}, {}, never, never, false>;
+}

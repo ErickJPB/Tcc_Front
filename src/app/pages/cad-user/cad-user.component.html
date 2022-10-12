@@ -1,0 +1,83 @@
+<!-- <po-dynamic-form (p-form)="getSearch($event)"
+#SearchFormUser
+
+[p-fields]="fieldsSearch"> 
+
+</po-dynamic-form> -->
+
+<div class="po-row">
+    <po-button
+      class="po-md-3"
+      p-label="Pesquisar"
+      (p-click)="clickbtnPesquisar(); modalSearch.open()"
+    >
+    </po-button>
+    <po-button
+      class="po-md-3"
+      p-label="Novo"
+       [p-disabled] ="!edit"
+      (p-click)="novoCad();"
+    >
+    </po-button>
+    <po-modal #modalSearch p-title="Pesquisa de Usuario"
+    p-size="auto"
+    >
+      <div class="sample-container">
+        <po-loading-overlay [hidden]="isHideLoading">
+
+        </po-loading-overlay>
+      </div>
+      <po-page-dynamic-search p-title="Pesquisar" 
+      [p-filters]="filters"> 
+        <po-table
+        [p-selectable]="true"
+        [p-single-select]="true"
+        [p-sort]="true"
+        [p-striped]="true"
+        [p-columns]="hiringProcessesColumns"
+        [p-items]="hiringProcesses"
+       
+       
+      >
+      </po-table>
+      </po-page-dynamic-search>
+    <po-modal-footer [p-disabled-align]="false">
+      <po-button p-kind="primary" p-label="Selecionar" (p-click)="Confirm()" > </po-button>
+    </po-modal-footer>
+    
+    >  </po-modal>
+
+    
+<form #parentForm>
+
+  <po-dynamic-form 
+  
+    #dynamicForm
+    p-auto-focus="nome"
+    [p-fields]="fields"
+    [p-load]="onLoadFields.bind(this)"
+    [p-validate]="this.onChangeFields.bind(this)"
+    [p-validate-fields]="validateFields"
+    [p-value]="users"
+  >
+  </po-dynamic-form>
+  
+  <div class="po-row">
+    <po-button
+      class="po-md-3"
+      [p-label]="labelButton"
+      [p-disabled]="dynamicForm?.form.invalid"
+      (p-click)=" getForm(dynamicForm)"
+    >
+    </po-button>
+    <!-- <po-button
+    class="po-md-3"
+    p-label="Editar"
+    [p-disabled]="!edit"
+    (p-click)=" getForm(dynamicForm)"
+  >
+  </po-button> -->
+  </div>
+ 
+  </form>
+  

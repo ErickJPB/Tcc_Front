@@ -1,0 +1,26 @@
+
+
+<div class="po-wrapper-menu-panel">
+  <po-toolbar
+  [p-profile]="profile"
+  [p-profile-actions]="profileActions"
+  [p-notification-actions]="notificationActions"
+  [p-notification-number]="getNotificationNumber()"
+  p-title="EasyMarket"
+>
+</po-toolbar>
+
+  
+    <po-menu-panel [p-menus]="menuItems" p-logo="https://po-ui.io/assets/po-logos/po_color_bg.svg"></po-menu-panel>
+  
+    <po-page-default [p-title]="title">
+
+      
+      <router-outlet></router-outlet>
+    
+    </po-page-default>
+
+    
+  </div>
+
+  

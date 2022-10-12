@@ -1,0 +1,66 @@
+
+<po-tabs>
+  <po-tab  #tabGrade  [p-active]="tab1" p-label="Produtos"(p-click)="onClickTab(tabGrade)" >
+    <po-table
+    p-container="shadow"
+    [p-columns]="columns"
+    [p-items]="items"
+    [p-loading]="loading"
+    [p-actions]="actions"
+    [p-striped]="true"
+    [p-selectable]="true"
+    [p-sort]="true"
+    (p-unselected)="decreaseTotal($event)"
+    
+
+  >
+    <ng-template p-table-column-template [p-property]="'component.type'" let-value>
+      <div class="badge {{ value }}">{{ value | uppercase }}</div>
+    </ng-template>
+  </po-table>
+
+
+  </po-tab>
+  <po-tab  #tabNovoProduto  [p-active]="tab2"  p-label="Novo cadastro" (p-click)="onClickTab(tabNovoProduto)">
+    <form #parentForm>
+
+      <po-dynamic-form 
+      
+        #dynamicForm
+        
+        [p-fields]="fields"
+        [p-value]="produtos"
+      >
+      </po-dynamic-form>
+      
+      <div class="po-row">
+        <po-button
+          class="po-md-3"
+          [p-label]="nameBotao"
+          [p-disabled]="dynamicForm?.form.invalid"
+          (p-click)="getForm(dynamicForm)"
+        >
+      
+        </po-button>
+        <po-button
+        class="po-md-3"
+        p-label="Limpar/Novo"
+        [p-disabled]="DisableBotaoLimpar"
+        (p-click)="oncLickLimpar(dynamicForm)"
+      >
+    
+      </po-button>
+      </div>
+     
+      </form>
+
+  </po-tab>
+</po-tabs>
+
+<po-modal p-click-out="true" p-size="sm" p-title="{{ detail?.descricao }} - {{ detail?.Fabricante }}">
+  <po-info class="po-sm-2" p-label="Estoque" [p-value]="detail?.estoque"> </po-info>
+
+  <po-info class="po-sm-6" p-label="Data cadastro" [p-value]="detail?.dataCadastro"> </po-info>
+
+  <po-info class="po-sm-4" p-label="Preço venda" [p-value]="detail?.precoVenda"> </po-info>
+</po-modal>

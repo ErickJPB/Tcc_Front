@@ -1,0 +1,167 @@
+
+
+<po-tabs>
+
+
+  <po-tab  #tabGrade p-active="true"  p-label="Grade" >
+    <div class="po-row">
+      <div class="po-xl-9 po-lg-9 po-md-9 po-sm-9"></div>
+      <div class="po-xl-9 po-lg-3 po-md-3 po-sm-3">
+        <po-input p-placeholder="Pesquisar" p-icon="po-icon-search" > 
+    
+        </po-input>
+      </div>
+    </div>
+        <po-table 
+        p-title="Entradas"
+        [p-sort]="true"
+        [p-striped]="true"
+        [p-columns]="columns"
+        [p-items]="Entradas"
+        [p-actions]="actions"
+        p-actions-right="true"
+        [p-loading]="loading"
+        p-container="shadow"
+        [p-selectable]="true"
+      >
+      </po-table>
+    </po-tab>
+    <po-tab  #tabNovoEntrada  p-label="Nova entrada" >
+      <form #parentForm>
+
+        <po-dynamic-form 
+        
+          #dynamicForm
+          
+          [p-fields]="fields"
+          [p-value]="EntradasForm"
+        >
+        </po-dynamic-form>
+
+    
+        <po-divider
+        p-label="Inserir Produtos" >
+    </po-divider>
+    <div class="po-row">
+        <p class="po-mt-5 po-ml-4 po-mr-2">Codigo ID</p>
+        <input class="po-md-3 po-mt-4" id="barrasId" name="barras"  #barrasId > 
+        <p class="  po-mt-5 po-ml-4 po-mr-2">Descrição</p>
+      <input class="po-md-3 po-mt-4 po-mr-2"   id="descricaoId" name="descricao" p-label="Descrição" #descricaoId >
+      <po-button class="po-md-2 po-mt-4" p-label="Adicionar produto" (p-click)="onClick(barrasId.value, descricaoId.value); abrirModal(modal)"> </po-button>
+      
+
+    
+    </div>
+   
+
+    <po-divider>
+    </po-divider>
+        <po-table
+    p-container="shadow"
+    [p-columns]="columnsProdutosgrade"
+    [p-items]="listProdutos"
+    [p-loading]="loading"
+    [p-striped]="true"
+    [p-selectable]="true"
+    [p-sort]="true"
+
+  >
+    <ng-template p-table-column-template [p-property]="'component.type'" let-value>
+      <div class="badge {{ value }}">{{ value | uppercase }}</div>
+    </ng-template>
+  </po-table>
+
+  <po-divider>
+</po-divider>
+        
+        <div class="po-row">
+          <po-button
+            class="po-md-3"
+            p-label="Salvar"
+            [p-disabled]="dynamicForm?.form.invalid"
+            (p-click)="getForm(dynamicForm)"
+            
+          >
+        
+          </po-button>
+          <po-button
+          class="po-md-3"
+          p-label="Limpar/Novo"
+          
+         
+        >
+      
+        </po-button>
+        </div>
+       
+        </form>
+        
+    </po-tab>
+  </po-tabs>
+
+  <po-modal #modaViewEntradas p-title="NF-e"
+  p-size="auto"
+  >
+  <po-list-view
+  p-property-title="name"
+  [p-items]="itemView"
+>
+  <ng-template p-list-view-content-template let-item>
+    <div class="po-row">
+      <po-info class="po-md-12" p-label="Data Cadastro" [p-value]="item.DataCadastro"></po-info>
+      <po-info class="po-md-12" p-label="Número nota" [p-value]="item.NumeroNota"></po-info>
+      <po-info class="po-md-12" p-label="Data Nota" [p-value]="item.DataNota"></po-info>
+      <po-info class="po-md-12" p-label="Fornecedor" [p-value]="item.Fornecedor"></po-info>
+     
+      <po-list-view
+  p-property-title="Produtos"
+  [p-items]="EntradaItemsView"
+>
+  <ng-template p-list-view-content-template let-item>
+    <div class="po-row">
+      
+      <po-info class="po-md-12" p-label="Produto Id" [p-value]="item.ProdutosId"></po-info>
+      <po-info class="po-md-12" p-label="Preço de compra" [p-value]="item.PrecoCompra"></po-info>
+      <po-info class="po-md-6" p-label="Quantidade" [p-value]="item.quantidade"></po-info>
+ 
+      
+    </div>
+  </ng-template>
+</po-list-view>
+
+    </div>
+  </ng-template>
+</po-list-view>
+
+
+
+
+
+      <po-modal-footer [p-disabled-align]="false">
+      <po-button p-kind="primary" p-label="Ok" (p-click)="Confirm();" > </po-button>
+    </po-modal-footer>
+    
+  </po-modal>
+
+
+  <po-modal #modal p-title="Pesquisa de Produtos"> 
+    <po-table
+    [p-selectable]="true"
+    [p-single-select]="true"
+    [p-sort]="true"
+    [p-striped]="true"
+    [p-columns]="columnsProdutosPesquisa"
+    [p-items]="itemsProdutos"
+  >
+  </po-table>
+
+  <div class="po-row">
+    <p class="po-mt-5 po-ml-4 po-mr-2">Quantidade</p>
+    <input class="po-md-2 po-mt-4" id="quantidadeId" name="barras"  #quantidadeId > 
+    <p class="  po-mt-5 po-ml-4 po-mr-2">Preço de Compra</p>
+  <input class="po-md-2 po-mt-4 po-mr-2"   id="precoCompraId" name="descricao" #precoCompraId >
+  </div>
+    <po-modal-footer [p-disabled-align]="false">
+      <po-button p-kind="primary" p-label="Confirmar" (p-click)="ConfirmModalProdutos(quantidadeId.value,precoCompraId.value);" > </po-button>
+    </po-modal-footer>  
+  </po-modal>
