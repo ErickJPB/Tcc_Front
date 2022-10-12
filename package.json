@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-	"build:prod": "ng build --base-href \"/Tcc_Front/\" --prod",	
+	"build:prod": "ng build --base-href \"/Tcc_Front/\" --configuration production",	
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
