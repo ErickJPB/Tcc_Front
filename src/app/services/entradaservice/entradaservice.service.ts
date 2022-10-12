@@ -20,14 +20,16 @@ export class EntradaserviceService {
 
 
    public getAllEntradas():Observable<Entradas[]>{
-    this.servicebase.GetApiBase();     
-    return this._http.get<Entradas[]>(this.servicebase.apiURL  +  Endpoint.GetAllEntradas , this.servicebase.httpOptions)
+    this.servicebase.GetApiBase();  
+	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	
+    return this._http.get<Entradas[]>(url  +  Endpoint.GetAllEntradas , this.servicebase.httpOptions)
     .pipe(                             
       map(this.extrairRespostaItem));
     }
 
     public InsertEntradas(entradas:Entradas):Observable<Entradas>{
-      return this._http.post<Entradas>(this.servicebase.apiURL + Endpoint.InsertEntradas, JSON.stringify(entradas),this.servicebase.httpOptions)
+	  const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";		
+      return this._http.post<Entradas>(url + Endpoint.InsertEntradas, JSON.stringify(entradas),this.servicebase.httpOptions)
 }
 
     

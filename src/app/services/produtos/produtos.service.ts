@@ -22,31 +22,37 @@ export class ProdutosService {
   }
 
   public  getEndpointProdutos(){
-    return this.servicebase.apiURL  +  Endpoint.GetAllProdutos 
+	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+    return url  +  Endpoint.GetAllProdutos 
   }
   public getAllProdutos():Observable<Produtos[]>{
-    this.servicebase.GetApiBase();     
-    return this._http.get<Produtos[]>(this.servicebase.apiURL  +  Endpoint.GetAllProdutos , this.servicebase.httpOptions)
+    const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
+	this.servicebase.GetApiBase();     
+    return this._http.get<Produtos[]>(url  +  Endpoint.GetAllProdutos , this.servicebase.httpOptions)
     .pipe(                             
       map(this.extrairRespostaItem));
   }
 
   public getProdutosIdOuDescricao(request: ProdutoPesquisarRequestDto){
+	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
     this.servicebase.GetApiBase();     
-    return this._http.post<Produtos[]>(this.servicebase.apiURL  +  Endpoint.GetProdutosIdOuDescricao ,JSON.stringify(request), this.servicebase.httpOptions)
+    return this._http.post<Produtos[]>(url  +  Endpoint.GetProdutosIdOuDescricao ,JSON.stringify(request), this.servicebase.httpOptions)
     .pipe(                             
       map(this.extrairRespostaItem));
   }
   public CreateProduto(produtos:Produtos):Observable<Produtos>{
-        return this._http.post<Produtos>(this.servicebase.apiURL + Endpoint.CreateProduto, JSON.stringify(produtos),this.servicebase.httpOptions)
+	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+        return this._http.post<Produtos>(url + Endpoint.CreateProduto, JSON.stringify(produtos),this.servicebase.httpOptions)
   }
 
   public UpdadeProduto(produtos:Produtos):Observable<Produtos>{
-    return this._http.put<Produtos>(this.servicebase.apiURL + Endpoint.UpdateProduto , JSON.stringify(produtos), this.servicebase.httpOptions)
+	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+    return this._http.put<Produtos>(url + Endpoint.UpdateProduto , JSON.stringify(produtos), this.servicebase.httpOptions)
   }
 
   public ExcluirProduto(produtos:Produtos):Observable<Produtos>{
-    return this._http.post<Produtos>(this.servicebase.apiURL + Endpoint.ExcluirProduto, JSON.stringify(produtos), this.servicebase.httpOptions)
+	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+    return this._http.post<Produtos>(url + Endpoint.ExcluirProduto, JSON.stringify(produtos), this.servicebase.httpOptions)
   }
 
   protected extrairRespostaItem(resposta: any) {
