@@ -64,7 +64,8 @@ export class UserService  implements OnInit{
           { label: 'São Paulo', value: 9 },
           { label: 'Guarulhos', value: 10 },
           { label: 'Campinas', value: 11 },
-          { label: 'São Bernardo do Campo', value: 12 }
+          { label: 'São Bernardo do Campo', value: 12 },
+          {label: 'Bebedouro', value: 21 }
         ];
       }
       case 3: {

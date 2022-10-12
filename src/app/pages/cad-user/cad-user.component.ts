@@ -42,7 +42,7 @@ export class CadUserComponent implements OnInit {
   users: CadUsers;
   listUsers: UserDtoResponse[] = [];
   dadosSegmentoMultiselect: PoMultiselectOption[] = [];
-  validateFields: Array<string> = ['email'];
+  validateFields: Array<string> = ['estado'];
   dynamicForm: NgForm;
   searchForm: NgForm;
   ngForm: NgForm;
@@ -141,6 +141,7 @@ export class CadUserComponent implements OnInit {
       format: ['Id', 'nome'],
       fieldLabel: 'nome',
       fieldValue: 'email',
+      
 
     }
   ];
@@ -219,7 +220,7 @@ export class CadUserComponent implements OnInit {
         { label: 'Minas Gerais', value: 4 }
       ]
     },
-    { property: 'cidade',  label: 'Cidade',  gridColumns: 6 },
+    { property: 'cidade',  label: 'Cidade',  gridColumns: 6 , disabled: true},
 
     {
       property: 'permissao',
@@ -265,7 +266,6 @@ export class CadUserComponent implements OnInit {
   }
 
   onChangeFields(changedValue: PoDynamicFormFieldChanged): PoDynamicFormValidation {
-    console.log(changedValue.value.estado);
     return {
       value: { cidade: undefined },
       fields: [
