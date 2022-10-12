@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ServiceBaseService } from '../service-base.service';
 import { Observable } from 'rxjs';
@@ -7,17 +7,24 @@ import { Endpoint } from 'src/app/shared/endpoint';
 import { map } from 'rxjs/operators';
 import { ProdutoPesquisarRequestDto } from 'src/app/models/Produtos/produto-pesquisar-request-dto';
 import { request } from 'express';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutosService {
+export class ProdutosService implements OnInit {
 
   constructor(private _http: HttpClient,
     public injector: Injector,
-    private servicebase: ServiceBaseService,
+    private cookie: CookieService
   ) {
+   
+  }
+
+  private servicebase =new ServiceBaseService(this._http,this.cookie)
+
+  ngOnInit(){
     this.servicebase.GetApiBase();
   }
 

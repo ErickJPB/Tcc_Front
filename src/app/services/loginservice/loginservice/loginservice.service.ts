@@ -15,7 +15,7 @@ export class LoginserviceService {
   urlToJson = '../assets/config.json';
   constructor(private _http: HttpClient,
     public injector: Injector,
-    private servicebase: ServiceBaseService,
+    public  servicebase :ServiceBaseService,
   ) {
     this.servicebase.GetApiBase();
   }
@@ -23,18 +23,10 @@ export class LoginserviceService {
 
   public postUser(user: User): Observable<User> {
 	  const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
-    console.log(JSON.stringify(user));
     return this._http.post<User>(url + Endpoint.Autenticacao, JSON.stringify(user), this.servicebase.httpOptions)
   }
   public getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
+   return this.servicebase.getCookie(name);
   }
 
 }

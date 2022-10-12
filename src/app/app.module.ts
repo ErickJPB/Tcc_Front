@@ -17,6 +17,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 
+
 @NgModule({
   declarations: [
     HomeComponentComponent,
@@ -27,7 +28,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     CadProdutoComponent,
     CadEntradasComponent,
     DashboardComponent,
-
+     
     
   ],
   imports: [

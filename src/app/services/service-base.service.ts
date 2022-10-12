@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceBaseService {
 
-  constructor(private _http: HttpClient)
+  constructor(private _http: HttpClient, private cookie: CookieService)
    {
 
    }
@@ -15,6 +18,7 @@ export class ServiceBaseService {
    apiURL: string;
   result:any
   urlToJson = '../assets/config.json';
+  token:any;
 
 
     public GetApiBase()  {
@@ -23,22 +27,32 @@ export class ServiceBaseService {
       });
   }
 
-  public  getCookie(name) {
+  public  getCookie2(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {
         var c = ca[i];
         while (c.charAt(0)==' ') c = c.substring(1,c.length);
         if (c.indexOf(nameEQ) == 0){ 
-          console.log(c.substring(nameEQ.length,c.length)["token"]); 
+          var teste = JSON.parse(c.substring(nameEQ.length,c.length))["token"];
+          console.log(teste); 
              return JSON.parse(c.substring(nameEQ.length,c.length))["token"];}
     }
+   
     return null;
 }
+
+public getCookie(name) {
+  if (this.cookie.get(name) === null || this.cookie.get(name) =='' ) return null;
+  const token = JSON.parse(this.cookie.get(name));
+    return token['token'];
+}
+
 
 public httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
                               'Authorization': `Bearer ${this.getCookie("oAuthToken")}` })
+                             
 }
 
 

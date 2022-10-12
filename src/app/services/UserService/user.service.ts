@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, OnInit } from '@angular/core';
 
 import { CadUsers } from 'src/app/models/cad-users';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -7,19 +7,26 @@ import { ServiceBaseService } from '../service-base.service';
 import { Endpoint } from 'src/app/shared/endpoint';
 import { map } from 'rxjs/operators';
 import { UserDtoResponse } from 'src/app/models/user-dto-response';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService  implements OnInit{
 
   constructor(private _http: HttpClient,
     public injector: Injector,
-    private servicebase:ServiceBaseService,){
-        this.servicebase.GetApiBase();
+    private cookie: CookieService,
+   ){
+        
   } 
+  private servicebase =new ServiceBaseService(this._http,this.cookie)
+
+  ngOnInit(){
+    this.servicebase.GetApiBase();
+  }
 
   public CreateUser(user: CadUsers): Observable<CadUsers> {
     console.log(JSON.stringify(user));
@@ -32,6 +39,7 @@ export class UserService {
   }
 
   public GetAllUser(): Observable<UserDtoResponse[]> {
+   
    const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
     return this._http.get<UserDtoResponse[]>(url + Endpoint.GetAllUsers, this.servicebase.httpOptions)
     .pipe(
@@ -88,4 +96,6 @@ export class UserService {
       fields: [document]
     };
   }
+
+ 
 }

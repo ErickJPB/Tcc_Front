@@ -18,7 +18,7 @@ export class HomeComponentComponent implements OnInit {
   
 
   ngOnInit(): void {
-    
+
     
   }
   
@@ -38,7 +38,9 @@ export class HomeComponentComponent implements OnInit {
     this.title = menu.label;
     switch(menu.label){
       case "Usuário":
+       
         this.router.navigate(['home/cadUsuario']);
+        
         break;
         case "Produtos":
           this.router.navigate(['home/Produtos']);

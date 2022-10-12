@@ -59,7 +59,9 @@ export class CadUserComponent implements OnInit {
     
   }
 
-
+  load() {
+    location.reload()
+  }
   novoCad() {
     this.users = {
       nome: "",
@@ -241,6 +243,7 @@ export class CadUserComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.users = {
       nome: "",
       dataNascimento: null,
