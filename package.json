@@ -10,10 +10,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+	"build:prod": "ng build --base-href \"/Tcc_Front/\" --prod",	
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "heroku-postbuild": "ng build --prod",
-    "prod" : "ng build --prod"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
