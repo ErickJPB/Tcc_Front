@@ -22,8 +22,9 @@ import { take, finalize, map } from 'rxjs/operators';
 import { EnumPermissao } from 'src/app/shared/Enums/enum-permissao';
 import { EnumEdit } from 'src/app/shared/Enums/enum-edit';
 import { uuid } from '@po-ui/ng-components/lib/utils/util';
-import { PoPageDynamicSearchFilters, PoPageDynamicTableActions, PoPageDynamicTableCustomAction, PoPageDynamicTableCustomTableAction } from '@po-ui/ng-templates';
+import { PoPageDynamicSearchFilters, PoPageDynamicTableActions, PoPageDynamicTableCustomAction, PoPageDynamicTableCustomTableAction, PoPageDynamicSearchLiterals } from '@po-ui/ng-templates';
 import { UserDtoResponse } from 'src/app/models/user-dto-response';
+
 
 
 @Component({
@@ -52,7 +53,9 @@ export class CadUserComponent implements OnInit {
   IsNew:boolean=false;
 
 
-  constructor(public poNotification: PoNotificationService, private registerService: UserService) { 
+  constructor(public poNotification: PoNotificationService,
+     private registerService: UserService,
+     ) { 
     
   }
 
@@ -280,11 +283,12 @@ export class CadUserComponent implements OnInit {
   }
 
 
-
   public readonly filters: Array<PoPageDynamicSearchFilters> = [
+    { property: 'nome', gridColumns: 6 },
     { property: 'email', gridColumns: 6 },
     { property: 'id', gridColumns: 6 },
     { property: 'cpf', gridColumns: 6 }
+    
   ];
 
   getColumns(): Array<PoTableColumn> {
@@ -330,6 +334,9 @@ export class CadUserComponent implements OnInit {
     this.listUsers = [];
     this.isHideLoading = false;
     this.hiringProcesses = this.getItems();
+
+
+  
   }
 
   public Confirm() {
@@ -446,6 +453,53 @@ export class CadUserComponent implements OnInit {
       }
     }
   }
+  filter(filters) {
+    let filteredItems = [...this.listUsers];
+    console.log(filters)
 
+    Object.keys(filters).forEach(filter => {
+      filteredItems = filteredItems.filter(register => {
+        if (typeof register[filter] === 'string') {
+          return register[filter].toLocaleLowerCase().includes(filters[filter].toLocaleLowerCase());
+        } else {
+          return register[filter] === filters[filter];
+        }
+      });
+    });
+
+    
+    return filteredItems;
+  }
+  
+  private searchItems(filter) {
+    console.log(filter);
+    this.hiringProcesses = [];
+    this.hiringProcesses = this.filter(filter);
+  }
+  onQuickSearch(filter) {
+    console.log(filter)
+    filter ? this.searchItems({ nome: filter }) : this.resetFilters();
+  }
+  private resetFilters() {
+    this.hiringProcesses = this.resetFilterHiringProcess();
+  }
+  resetFilterHiringProcess() {
+    return [...this.getItems()];
+  }
+  onAdvancedSearch(filter) {
+    filter ? this.searchItems(filter) : this.resetFilters();
+  }
+  onChangeDisclaimers(disclaimers) {
+    const filter = {};
+    disclaimers.forEach(item => {
+      filter[item.property] = item.value;
+    });
+    this.searchItems(filter);
+  }
+  readonly literals: PoPageDynamicSearchLiterals = {
+    filterConfirmLabel: 'Aplicar',
+    filterTitle: 'Filtro avançado',
+    quickSearchLabel: 'Valor pesquisado:'
+  };
 
 }

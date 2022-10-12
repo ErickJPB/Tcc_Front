@@ -28,7 +28,12 @@
         </po-loading-overlay>
       </div>
       <po-page-dynamic-search p-title="Pesquisar" 
-      [p-filters]="filters"> 
+      [p-filters]="filters"
+      (p-quick-search)="onQuickSearch($event)"
+      (p-advanced-search)="onAdvancedSearch($event)"
+      (p-change-disclaimers)="onChangeDisclaimers($event)"
+      [p-literals]="literals"
+      > 
         <po-table
         [p-selectable]="true"
         [p-single-select]="true"
@@ -36,8 +41,6 @@
         [p-striped]="true"
         [p-columns]="hiringProcessesColumns"
         [p-items]="hiringProcesses"
-       
-       
       >
       </po-table>
       </po-page-dynamic-search>
