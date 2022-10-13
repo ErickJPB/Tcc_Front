@@ -14,6 +14,7 @@ import { CadUserComponent } from './pages/cad-user/cad-user.component';
 import { CadProdutoComponent } from './pages/cad-produto/cad-produto.component';
 import { CadEntradasComponent } from './pages/cad-entradas/cad-entradas.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -28,6 +29,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     CadProdutoComponent,
     CadEntradasComponent,
     DashboardComponent,
+    
      
     
   ],

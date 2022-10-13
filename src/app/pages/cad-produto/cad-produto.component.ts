@@ -194,7 +194,6 @@ export class CadProdutoComponent implements OnInit {
         });
     }
     else{
-      console.log(this.produtos.dataCadastro);
       
       this.service.UpdadeProduto(this.produtos)
       .pipe(

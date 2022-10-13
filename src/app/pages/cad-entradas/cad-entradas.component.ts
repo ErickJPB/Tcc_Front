@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, Input } from '@angular/core';
 import { PoTableColumn, PoTableAction, PoModalComponent, PoDynamicFormField, PoNotification, PoToasterType, PoNotificationService } from '@po-ui/ng-components';
 
 import { PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
@@ -7,11 +7,12 @@ import { EntradaserviceService } from 'src/app/services/entradaservice/entradase
 import { Entradas } from 'src/app/models/entradas/entradas';
 import { EntradaItems } from 'src/app/models/entradas/entrada-items';
 import { Produtos } from 'src/app/models/Produtos/produtos';
-import { UntypedFormGroup, UntypedFormBuilder, Validators, NgForm } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, NgForm, Form } from '@angular/forms';
 import { ProdutosService } from 'src/app/services/produtos/produtos.service';
 import { ProdutoPesquisarRequestDto } from 'src/app/models/Produtos/produto-pesquisar-request-dto';
 import { async } from '@angular/core/testing';
 import { EntradaSelectItem } from 'src/app/models/entradas/entrada-select-item';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-cad-entradas',
@@ -30,6 +31,7 @@ export class CadEntradasComponent implements OnInit {
    EntradasForm: Entradas[];
    EntradaItems:Array<any>;
    EntradaItemsView :EntradaItems[];
+   EntradasView:Entradas[];
    loading:boolean;
    actionsRight = true;
    dynamicForm:NgForm;
@@ -43,25 +45,27 @@ export class CadEntradasComponent implements OnInit {
    modalteste:PoModalComponent;
    listProdutos:EntradaSelectItem[] =[];
    idRegister:number;
+   reactiveForm: UntypedFormGroup;
 
-  constructor(public poNotification: PoNotificationService,private entradaService :EntradaserviceService ,private produtoService:ProdutosService) { 
+  constructor(public poNotification: PoNotificationService,
+    private entradaService :EntradaserviceService ,private produtoService:ProdutosService,
+    
+    ) { 
 
-     
+      
   }
 
- 
-  public readonly filters: Array<PoPageDynamicSearchFilters> = [
-    { property: 'numeroNota', gridColumns: 6 },
-    { property: 'descricao', gridColumns: 6 },
-    { property: 'fornecedor', gridColumns: 6 }
-  ];
+
 
   ngOnInit(): void {
     this.columns = this.getColumns();
     this.columnsProdutosPesquisa =this.getColumnsProdutosPesquisa();
     this.columnsProdutosgrade=this.getColumnsProdutosGrade();
+   
     
   }
+
+  
 Confirm(){
   this.poModal.close();
 }
@@ -87,7 +91,10 @@ Confirm(){
     }
   }
   intevalo = setInterval( ()=>{
-    this.Entradas = this.getItems(); 
+    this.EntradasView = this.getItems(); 
+   setTimeout(() => {
+    clearInterval(this.intevalo)
+   }, 1500);
    },1000);
 
   getColumns(): Array<PoTableColumn> {
@@ -128,6 +135,7 @@ Confirm(){
         };
       })
     })
+   
     return this.Entradas;
   }
   fields: Array<PoDynamicFormField> = [
@@ -226,7 +234,26 @@ Confirm(){
 console.log(this.itemsProdutos);
   
   }
+  search(event){
+    
+    if(+event ===NaN || event ===undefined ){
+      this.EntradasView=this.getItems();
+      return;
+    }
+    let retorno:Array<Entradas> =[];
+  retorno =this.getItems();
+  this.EntradasView = retorno.filter(x=>x.NumeroNota===+event);
+    
+  }
 
+bntEnterSearch(value){
+  
+  if(+value.modelLastUpdate==NaN || value.modelLastUpdate ==undefined || value.modelLastUpdate ==null){
+    this.EntradasView=this.getItems();  return;}
+  let retorno:Array<Entradas> =[];
+  retorno =this.getItems();
+  this.EntradasView = retorno.filter(x=>x.NumeroNota===+value.modelLastUpdate);
+}
   abrirModal(modal){
     this.modalteste = modal;
     this.modalteste.open();

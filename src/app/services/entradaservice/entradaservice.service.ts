@@ -16,12 +16,12 @@ export class EntradaserviceService {
     public injector: Injector,
     private cookie: CookieService,) {
    }
+
    private servicebase =new ServiceBaseService(this._http,this.cookie)
 
    ngOnInit(){
      this.servicebase.GetApiBase();
    }
-
    public getAllEntradas():Observable<Entradas[]>{
     this.servicebase.GetApiBase();  
 	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	

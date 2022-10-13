@@ -7,9 +7,10 @@
     <div class="po-row">
       <div class="po-xl-9 po-lg-9 po-md-9 po-sm-9"></div>
       <div class="po-xl-9 po-lg-3 po-md-3 po-sm-3">
-        <po-input p-placeholder="Pesquisar" p-icon="po-icon-search" > 
-    
-        </po-input>
+        
+        <po-number #teste p-placeholder="Pesquisar"  (p-blur)="search($event)" p-icon="po-icon-search" (p-change)="search($event)" (keyup.enter)="bntEnterSearch(teste)"   > 
+        </po-number>
+      
       </div>
     </div>
         <po-table 
@@ -17,7 +18,7 @@
         [p-sort]="true"
         [p-striped]="true"
         [p-columns]="columns"
-        [p-items]="Entradas"
+        [p-items]="EntradasView"
         [p-actions]="actions"
         p-actions-right="true"
         [p-loading]="loading"
