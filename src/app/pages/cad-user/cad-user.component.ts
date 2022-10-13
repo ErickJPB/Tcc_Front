@@ -161,7 +161,7 @@ export class CadUserComponent implements OnInit {
       
       label: 'Data de nascimento',
       type: 'date',
-      format: 'mm/dd/yyyy',
+      format: 'dd/mm/yyyy',
       gridColumns: 6,
       gridSmColumns: 12,
       maxValue: '2010-01-01',

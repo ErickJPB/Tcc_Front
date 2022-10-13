@@ -180,7 +180,7 @@ Confirm(){
       gridColumns: 4,
       gridSmColumns: 6,
       type: 'date',
-      format: 'mm/dd/yyyy',
+      format: 'dd/mm/yyyy',
     }
   ]
 
