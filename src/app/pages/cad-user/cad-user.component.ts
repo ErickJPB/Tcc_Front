@@ -59,9 +59,6 @@ export class CadUserComponent implements OnInit {
     
   }
 
-  load() {
-    location.reload()
-  }
   novoCad() {
     this.users = {
       nome: "",
@@ -210,7 +207,6 @@ export class CadUserComponent implements OnInit {
     },
     {
       property: 'estado',
-      
       label: "Estado",
       gridColumns: 6,
       options: [
@@ -218,9 +214,10 @@ export class CadUserComponent implements OnInit {
         { label: 'São Paulo', value: 2 },
         { label: 'Rio de Janeiro', value: 3 },
         { label: 'Minas Gerais', value: 4 }
-      ]
+      ],
+      
     },
-    { property: 'cidade',  label: 'Cidade',  gridColumns: 6 , disabled: true},
+    { property: 'cidade', placeholder:"Selecione um estado ", label: 'Cidade',  gridColumns: 6 , disabled: false , options:undefined},
 
     {
       property: 'permissao',
@@ -272,6 +269,7 @@ export class CadUserComponent implements OnInit {
         {
           property: 'cidade',
           gridColumns: 6,
+          placeholder:"Selecione uma cidade",
           options: this.registerService.getCity(changedValue.value.estado),
           disabled: false
         }
@@ -279,6 +277,8 @@ export class CadUserComponent implements OnInit {
     };
 
   }
+
+  
 
   onLoadFields(value: any) {
     return this.registerService.getUserDocument(value);
@@ -325,7 +325,7 @@ export class CadUserComponent implements OnInit {
               , number: dados.number, endereco: dados.endereco, Password: dados.Password
             })
 
-
+          
         });
       })
 

@@ -59,8 +59,8 @@
     p-auto-focus="nome"
     [p-fields]="fields"
     [p-load]="onLoadFields.bind(this)"
-    [p-validate]="this.onChangeFields.bind(this)"
     [p-validate-fields]="validateFields"
+    [p-validate]="onChangeFields.bind(this)"
     [p-value]="users"
   >
   </po-dynamic-form>
