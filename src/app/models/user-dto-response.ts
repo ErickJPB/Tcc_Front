@@ -13,5 +13,6 @@ export class UserDtoResponse {
     cidade:string;
     endereco:string;
     Password:string;
+    telefone:string;
     
 }

@@ -19,8 +19,7 @@ export class UserService  implements OnInit{
   constructor(private _http: HttpClient,
     public injector: Injector,
     private cookie: CookieService,
-   ){
-        
+   ){     
   } 
   private servicebase =new ServiceBaseService(this._http,this.cookie)
 

@@ -322,7 +322,7 @@ export class CadUserComponent implements OnInit {
             {
               nome: dados.nome, email: dados.email, cpf: dados.cpf, Id: dados.Id, RolesId: this.PermissaoString,
               Genero: dados.Genero, cidade: dados.cidade, datanascimento: dados.datanascimento, estado: dados.estado
-              , number: dados.number, endereco: dados.endereco, Password: dados.Password
+              , number: dados.number, endereco: dados.endereco, Password: dados.Password,telefone:dados.telefone
             })
 
           
@@ -363,7 +363,7 @@ export class CadUserComponent implements OnInit {
       password: selecttedUser.Password,
       cidade: selecttedUser.cidade,
       permissao: this.returnPermissaoInt(selecttedUser),
-      telefone: ""
+      telefone: selecttedUser.telefone
 
     }
     if (selecttedUser.Id != null) {
