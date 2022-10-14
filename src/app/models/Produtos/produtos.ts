@@ -3,7 +3,7 @@ export class Produtos {
     descricao:string;
     precoVenda:number;
     estoque:number;
-    status:boolean;
+    status:number;
     Fabricante:string;
     dataCadastro:Date;
 }

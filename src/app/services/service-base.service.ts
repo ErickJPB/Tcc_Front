@@ -23,7 +23,7 @@ export class ServiceBaseService {
 
     public GetApiBase()  {
      this._http.get<any>(this.urlToJson).subscribe(response => {
-      this.apiURL = "https://easymarketserviceapideploy.azurewebsites.net/v1/";//response["apiBase"];
+      this.apiURL = response["apiBase"]; //"https://easymarketserviceapideploy.azurewebsites.net/v1/";
       });
   }
 

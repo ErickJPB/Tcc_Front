@@ -204,7 +204,7 @@ Confirm(){
     return [
       { property: 'ProdutoId', type: 'number', width: '8%' },
       { property: 'descricao' , label:'Descrição'},
-      { property: 'Fabricante' , label:'Fabticante'},
+      { property: 'Fabricante' , label:'Fabricante'},
       { property: 'precoVenda' ,  label:'Preço de Venda'},
       { property: 'dataCadastro', label: 'Data Cadastro', type: 'dateTime', visible:true },
       { property: 'estoque', label: 'Estoque', type: 'number', width: '15%', visible: true },

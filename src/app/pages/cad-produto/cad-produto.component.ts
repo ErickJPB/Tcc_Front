@@ -88,7 +88,6 @@ export class CadProdutoComponent implements OnInit {
   }
   editar(item) {
     this.detail = item;
-    console.log(this.detail)
     this.tab1=false;
     this.tab2=true;
     this.produtos = this.detail;
@@ -146,10 +145,11 @@ export class CadProdutoComponent implements OnInit {
         type: 'boolean',
         width: '8%',
         labels: [
-          { value: 'true', color: 'color-11', label: 'Ativo' },
-          { value: 'false', color: 'color-08', label: 'Inativo' },
+          { value: '1', color: 'color-11', label: 'Ativo', },
+          { value: '0', color: 'color-08', label: 'Inativo' },
           
-        ]
+        ],
+        
       }
     ];
   }
@@ -164,11 +164,14 @@ export class CadProdutoComponent implements OnInit {
       produtoList.forEach(dados=>{
         this.listProdutos.push({
           Id:dados.Id, descricao:dados.descricao, estoque:dados.estoque,precoVenda:dados.precoVenda,
-          status:dados.status, Fabricante:dados.Fabricante, dataCadastro:dados.dataCadastro
+          status:dados.status? 1: 0, Fabricante:dados.Fabricante, dataCadastro:dados.dataCadastro
         })
       })
       this.loading =false;
-    })
+    }), err=>{
+      this.poNotification.error("Erro ao conectar ao servidor");
+    }
+    
     return this.listProdutos;
   }
 
@@ -181,6 +184,7 @@ export class CadProdutoComponent implements OnInit {
     
     if (this.produtos.Id==0 ||this.produtos.Id ==null ) {
       this.produtos = this.dynamicForm.form.value;
+     
       this.service.CreateProduto(this.produtos)
         .pipe(
           take(2),
@@ -194,7 +198,7 @@ export class CadProdutoComponent implements OnInit {
         });
     }
     else{
-      
+      console.log(this.produtos.status)
       this.service.UpdadeProduto(this.produtos)
       .pipe(
         take(1),
@@ -248,13 +252,14 @@ export class CadProdutoComponent implements OnInit {
       icon:'po-icon po-icon-clipboard'
     },
     {
-      property: "Status",
+      property: "status",
+      type: 'boolean',
       label: "Status",
       gridColumns: 4,
       gridSmColumns: 6,
       options: [
         { label: 'Ativo', value: 1 },
-        { label: 'Inativo', value: 2 },
+        { label: 'Inativo', value: 0},
       
       ]
     },

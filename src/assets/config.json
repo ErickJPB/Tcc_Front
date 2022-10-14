@@ -1,5 +1,5 @@
 {
-    "apiBase": "https://easymarketserviceapideploy.azurewebsites.net/v1/",
-    "apiBasedev": "https://localhost:44386/v1/"
+    "apiBaseProd": "https://easymarketserviceapideploy.azurewebsites.net/v1/",
+    "apiBase": "https://localhost:44386/v1/"
 }
 
