@@ -22,7 +22,7 @@ export class LoginserviceService {
 
 
   public postUser(user: User): Observable<User> {
-	  const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
+	  const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";
     return this._http.post<User>(url + Endpoint.Autenticacao, JSON.stringify(user), this.servicebase.httpOptions)
   }
   public getCookie(name) {

@@ -29,17 +29,17 @@ export class UserService  implements OnInit{
 
   public CreateUser(user: CadUsers): Observable<CadUsers> {
     console.log(JSON.stringify(user));
-	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
+	const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";
     return this._http.post<CadUsers>(url + Endpoint.CriarUsuario, JSON.stringify(user), this.servicebase.httpOptions)
   }
     public UpdateUser(user: CadUsers): Observable<CadUsers> {
-    const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
+    const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";
     return this._http.put<CadUsers>(url + Endpoint.UpdateUser, JSON.stringify(user), this.servicebase.httpOptions)
   }
 
   public GetAllUser(): Observable<UserDtoResponse[]> {
    
-   const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
+   const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";
     return this._http.get<UserDtoResponse[]>(url + Endpoint.GetAllUsers, this.servicebase.httpOptions)
     .pipe(
       map(this.extrairRespostaItem));

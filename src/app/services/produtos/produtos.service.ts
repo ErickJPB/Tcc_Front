@@ -29,11 +29,11 @@ export class ProdutosService implements OnInit {
   }
 
   public  getEndpointProdutos(){
-	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+	const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";	  
     return url  +  Endpoint.GetAllProdutos 
   }
   public getAllProdutos():Observable<Produtos[]>{
-    const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";
+    const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";
 	this.servicebase.GetApiBase();     
     return this._http.get<Produtos[]>(url  +  Endpoint.GetAllProdutos , this.servicebase.httpOptions)
     .pipe(                             
@@ -41,24 +41,24 @@ export class ProdutosService implements OnInit {
   }
 
   public getProdutosIdOuDescricao(request: ProdutoPesquisarRequestDto){
-	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+	const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";	  
     this.servicebase.GetApiBase();     
     return this._http.post<Produtos[]>(url  +  Endpoint.GetProdutosIdOuDescricao ,JSON.stringify(request), this.servicebase.httpOptions)
     .pipe(                             
       map(this.extrairRespostaItem));
   }
   public CreateProduto(produtos:Produtos):Observable<Produtos>{
-	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+	const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";	  
         return this._http.post<Produtos>(url + Endpoint.CreateProduto, JSON.stringify(produtos),this.servicebase.httpOptions)
   }
 
   public UpdadeProduto(produtos:Produtos):Observable<Produtos>{
-	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+	const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";	  
     return this._http.put<Produtos>(url + Endpoint.UpdateProduto , JSON.stringify(produtos), this.servicebase.httpOptions)
   }
 
   public ExcluirProduto(produtos:Produtos):Observable<Produtos>{
-	const url = "https://easymarketserviceapideploy.azurewebsites.net/v1/";	  
+	const url = "https://easymarketserviceapi20221208192441.azurewebsites.net/v1/";	  
     return this._http.post<Produtos>(url + Endpoint.ExcluirProduto, JSON.stringify(produtos), this.servicebase.httpOptions)
   }
 
